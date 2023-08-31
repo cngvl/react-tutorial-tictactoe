@@ -1,5 +1,5 @@
 // import React, { Fragment } from "react";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 
 function Square({ value, onSquareClick }) {
   return (
@@ -98,12 +98,16 @@ export default function Game() {
     } else {
       description = "Go to game start";
     }
+
     return (
       <li key={move}>
         <button onClick={() => jumpTo(move)}>{description}</button>
       </li>
     );
   });
+
+  const lastMove = history.length;
+  console.log(`Test string`);
 
   return (
     <div className="game">
@@ -112,7 +116,9 @@ export default function Game() {
       </div>
       <div className="game-info">
         <ol>{moves}</ol>
+        <p>You are at move #{lastMove}</p>
       </div>
+      <div></div>
     </div>
   );
 }
