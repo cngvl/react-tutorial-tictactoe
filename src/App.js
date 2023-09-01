@@ -1,5 +1,4 @@
-// import React, { Fragment } from "react";
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 
 function Square({ value, onSquareClick }) {
   return (
@@ -21,8 +20,6 @@ function Board({ xIsNext, squares, onPlay }) {
       nextSquares[i] = "O";
     }
     onPlay(nextSquares);
-    // console.log(`${value} clicked!`);
-    // setValue(`X`);
   }
 
   const winner = calculateWinner(squares);
@@ -33,24 +30,34 @@ function Board({ xIsNext, squares, onPlay }) {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
+  for (let row = 0; row < 3; row++) {}
+
   return (
     <React.Fragment>
       <div className="status">{status}</div>
-      <div className="board-row">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-      </div>
+      {(() => {})()}
+      {(() => {
+        const rows = [];
+        for (let i = 0; i < 3; i++) {
+          const cols = [];
+          for (let j = 0; j < 3; j++) {
+            const squareIndex = i * 3 + j;
+            cols.push(
+              <Square
+                key={squareIndex}
+                value={squares[squareIndex]}
+                onSquareClick={() => handleClick(squareIndex)}
+              />
+            );
+          }
+          rows.push(
+            <div className="board-row" key={i}>
+              {cols}
+            </div>
+          );
+        }
+        return rows;
+      })()}
     </React.Fragment>
   );
 }
@@ -91,12 +98,27 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
+  // console.log(`history: ${history}`);
   const moves = history.map((squares, move) => {
+    // console.log(`move: ${move}`);
+    // console.log(`history.length: ${history.length - 1}`);
+
     let description;
-    if (move > 0) {
+    if (move === history.length - 1) {
+      description = "You are on move #" + (move + 1);
+    } else if (move > 0) {
       description = "Go to move #" + move;
     } else {
       description = "Go to game start";
+    }
+    // console.log(`lastMove: ${lastMove}`);
+
+    if (move === history.length - 1) {
+      return (
+        <li key={move}>
+          <p onClick={() => jumpTo(move)}>{description}</p>
+        </li>
+      );
     }
 
     return (
@@ -106,9 +128,6 @@ export default function Game() {
     );
   });
 
-  const lastMove = history.length;
-  console.log(`Test string`);
-
   return (
     <div className="game">
       <div className="game-board">
@@ -116,9 +135,8 @@ export default function Game() {
       </div>
       <div className="game-info">
         <ol>{moves}</ol>
-        <p>You are at move #{lastMove}</p>
+        {/* <p>You are at move #{lastMove}</p> */}
       </div>
-      <div></div>
     </div>
   );
 }
