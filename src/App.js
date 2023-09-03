@@ -111,7 +111,6 @@ export default function Game() {
     } else {
       description = "Go to game start";
     }
-    // console.log(`lastMove: ${lastMove}`);
 
     if (move === history.length - 1) {
       return (
