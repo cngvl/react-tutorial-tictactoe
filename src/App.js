@@ -35,7 +35,7 @@ function Board({ xIsNext, squares, onPlay }) {
   return (
     <React.Fragment>
       <div className="status">{status}</div>
-      {(() => {})()}
+      {/* {(() => {})()} */}
       {(() => {
         const rows = [];
         for (let i = 0; i < 3; i++) {
@@ -98,7 +98,6 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
-  // console.log(`history: ${history}`);
   const moves = history.map((squares, move) => {
     // console.log(`move: ${move}`);
     // console.log(`history.length: ${history.length - 1}`);
