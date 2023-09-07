@@ -2,6 +2,8 @@
 
 This was my first attempt at learning React.js! I started off by following the [offical React.js tutorial documentation](https://react.dev/learn/tutorial-tic-tac-toe). What I aimed to achieve by following this tutorial was to just get an understand of the general concepts of React props, state, components and event handling, without having to fiddle around too much with any setup or styling processes. 
 
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+
 ## Prerequisites
 
 Before you begin, make sure you have the following tools and knowledge:
